@@ -3,18 +3,13 @@ require('dotenv').config();
 const { Pool } = require('pg');
 
 // ใช้ .env จะปลอดภัยกว่า
-// const pool = new Pool({
-//     host: process.env.DB_HOST,
-//     user: process.env.DB_USER,
-//     password: process.env.DB_PASSWORD,
-//     database: process.env.DB_NAME,
-//     port: process.env.DB_PORT,
-//     ssl: { rejectUnauthorized: false }
-// });
-
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,  // ใช้ connection string ของ pooler
-  ssl: { rejectUnauthorized: false }          // ต้องใช้ SSL กับ Supabase
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
+    port: process.env.DB_PORT,
+    ssl: { rejectUnauthorized: false }
 });
 
 // ฟังก์ชันสำหรับ query กลาง ๆ ใช้งานทั่วโปรเจกต์
