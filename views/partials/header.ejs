@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>
+    <%= title %>
+  </title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/navbar.css">
+</head>
+
+<body>
+  <nav class="navbar">
+    <div class="navbar-links" style=" display: flex; align-items: center; gap: 1rem;">
+      <a href="/" class="navbar-logo">
+        <img src="/images/logo.png" alt="" height="32" style="vertical-align: middle;">
+      </a>
+      <a href="/">หน้าแรก</a>
+      <a href="/about">เกี่ยวกับเรา</a>
+    </div>
+    <div id="session-login" class="navbar-links" style="display: flex; align-items: center; gap: 1rem;">
+      <% if (typeof user_name !=='undefined' ) { %>
+        <span class="navbar-user">ยินดีต้อนรับ, <%= user_name %></span>
+        <a href="/logout">ออกจากระบบ</a>
+        <% } else { %>
+          <a href="/login">เข้าสู่ระบบ</a>
+          <a href="/register">สมัครสมาชิก</a>
+        <% } %>
+    </div>
+</nav>
