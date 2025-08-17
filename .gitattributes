@@ -1,0 +1,5 @@
+# ให้ Git จัดการ line endings อัตโนมัติ
+* text=auto
+
+# บอกว่าไม่ต้องตรวจ line endings ใน node_modules
+node_modules/* -text
