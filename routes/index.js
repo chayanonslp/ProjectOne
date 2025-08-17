@@ -57,7 +57,43 @@ router.post('/login', async (req, res) => {
     res.render('login', { title: 'เข้าสู่ระบบ', error: 'เกิดข้อผิดพลาดในการเข้าสู่ระบบ' });
   }
 });
+// แสดงฟอร์ม register
+router.get('/register', (req, res) => {
+  res.render("register", {
+    user_id: "",
+    user_email: "",
+    user_name: req.session.user_name,
+    user_phone: "",
+    error: "",
+    title: 'สมัครสมาชิก'
+  });
+});
+// รับข้อมูลจากฟอร์ม register
+router.post('/register', async (req, res) => {
+  try {
+    const { user_email, user_password_hash, user_name, user_phone } = req.body;
+    console.log('Registering user:', user_email, user_name, user_phone, user_password_hash);
+    // เพิ่มผู้ใช้ใหม่ลง database
+    await db.query(
+      `INSERT INTO users 
+         (user_email, user_password_hash, user_name, user_phone, user_is_active, role_id, role_code, user_created_at, user_updated_at) 
+       VALUES 
+         ($1, $2, $3, $4, $5, 2, 'USR', NOW(), NOW())`,
+      [user_email, user_password_hash, user_name, user_phone, 0]
+    );
 
+    res.redirect('/login'); // สมัครเสร็จ redirect ไป login
+  } catch (error) {
+    console.error("Error during register:", error);
+    res.render("register", {
+      error:  error.code === '23505' ? ' (อีเมลนี้ถูกใช้ไปแล้ว)' : '',
+      user_email: req.body.user_email,
+      user_name: undefined,
+      user_phone: req.body.user_phone,
+      title: 'สมัครสมาชิก'
+    });
+  }
+});
 router.get('/logout', (req, res) => {
   console.log('Logging out user:', req.session.user_name);
   // ลบ session และ redirect ไปหน้าแรก

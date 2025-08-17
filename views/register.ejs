@@ -1,0 +1,126 @@
+<%- include('partials/header') %>
+    <title>Register</title>
+    <style>
+        /* สไตล์เดิมๆ ยังคงใช้ได้ */
+        body {
+            font-family: sans-serif;
+            background: #0f172a;
+            color: #e5e7eb;
+            display: flexbox;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0
+        }
+
+        .card {
+            background: #111827;
+            padding: 20px 25px;
+            border-radius: 14px;
+            max-width: 700px;
+            width: 100%
+        }
+
+        form {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px
+        }
+
+        .full {
+            grid-column: 1/-1
+        }
+
+        label {
+            display: block;
+            margin: 4px 0;
+            font-size: .9rem;
+            color: #94a3b8
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #293241;
+            background: #0b1020;
+            color: #e5e7eb
+        }
+
+        .actions {
+            grid-column: 1/-1;
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            margin-top: 6px
+        }
+
+        button {
+            padding: 10px 14px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer
+        }
+
+        .primary {
+            background: #10b981;
+            color: #06281c
+        }
+
+        .ghost {
+            background: transparent;
+            color: #e5e7eb;
+            border: 1px solid #243042
+        }
+
+        .hint {
+            font-size: .8rem;
+            color: #94a3b8
+        }
+    </style>
+    <link rel="stylesheet" href="/css/login.css">
+    <div class="login-container">
+        <main class="card">
+            <p class="lead">ฟอร์มสำหรับผู้ใช้งาน</p>
+            <form id="registerForm" action="/register" method="post" novalidate>
+                <div class="full">
+                    <% if (typeof error !=="" ) { %>
+                        <div class="error-message">
+                            <%= error %>
+
+                        </div>
+                        <% } %>
+                </div>
+                <!-- user_name -->
+                <div class="full">
+                    <label for="user_name">ชื่อผู้ใช้</label>
+                    <input id="user_name" name="user_name" type="text" value="<%= user_name || '' %>" required />
+                </div>
+                <!-- user_email -->
+         
+                <div class="full">
+                    <label for="user_email">Email</label>
+                    <input id="user_email" name="user_email" type="email" value="<%= user_email || '' %>" required />
+                </div>
+                <!-- password -->
+                <div class="full">
+                    <label for="user_password_hash">รหัสผ่าน</label>
+                    <input id="user_password_hash" name="user_password_hash" type="password" minlength="8" required />
+                </div>
+                <!-- user_phone -->
+                <div class="full">
+                    <label for="user_phone">โทรศัพท์</label>
+                    <input id="user_phone" name="user_phone" type="tel" value="<%= user_phone || '' %>" />
+                </div>
+
+                <div class="actions">
+                    <button type="reset" class="ghost">ล้างค่า</button>
+                    <button type="submit" class="primary">สมัครสมาชิก</button>
+                </div>
+            </form>
+        </main>
+    </div>
+
+    <%- include('partials/footer') %>

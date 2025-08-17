@@ -2,7 +2,7 @@
     <title>Login Page</title>
     <link rel="stylesheet" href="/css/login.css">
     <div class="login-container">
-        <h2>Login</h2>
+          <p class="lead">เข้าสู่ระบบ </p>
         <form action="/login" method="POST" aria-multiline="true">
 
             <div class="form-group">
@@ -18,7 +18,11 @@
                     <%= error %>
                 </div>
                 <% } %>
-                <button type="submit">Login</button>
+                 <div class="actions">
+                    <button type="reset" class="ghost">ล้างค่า</button>
+                    <button type="submit" class="primary">เข้าสู่ระบบ </button>
+                </div>
+               
         </form>
     </div>
 <%- include('partials/footer') %>
